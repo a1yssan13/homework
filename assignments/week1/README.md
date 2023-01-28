@@ -13,7 +13,7 @@ For example, this week we will implement a linear regression. Unlike just about 
 
 ## Your Project
 
-You are given one file to edit — `model.py`. You must implement a linear regression model to satisfy `main.py`.
+You are given one file to edit — `model.py`. You must implement a linear regression model to satisfy `main.py`. 
 
 You may use `numpy` or other numerical libraries, but you may not use any machine learning libraries (e.g. `scikit-learn` or `pytorch`).
 
