@@ -31,11 +31,16 @@ class MLP(nn.Module):
         super(MLP, self).__init__()
         self.act = activation()
         self.first = nn.Linear(input_size, hidden_size)
-        sizes = [
-            *range(
-                hidden_size, num_classes, -(hidden_size - num_classes) // hidden_count
-            )
-        ]
+        if -(hidden_size - num_classes) // hidden_count < 0:
+            sizes = [
+                *range(
+                    hidden_size,
+                    num_classes,
+                    -(hidden_size - num_classes) // hidden_count,
+                )
+            ]
+        else:
+            sizes = [hidden_size for _ in range(hidden_count)]
         print(sizes)
         hid_layers = []
         for i in range(hidden_count - 1):
