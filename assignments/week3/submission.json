@@ -7,6 +7,7 @@
         }
     ],
     "sources": [
-        "ChatGPT"
+        "ChatGPT",
+        "Deep, Big, Simple Neural Nets for Handwritten Digit Recognition by Ciresan, Meier, Cambardella, Schmidhuber"
     ]
 }

@@ -29,6 +29,7 @@ class MLP(nn.Module):
             initializer: The initializer to use for the weights.
         """
         super(MLP, self).__init__()
+        self.dropout = nn.Dropout(0.3)
         self.act = activation()
         self.first = nn.Linear(input_size, hidden_size)
         if -(hidden_size - num_classes) // hidden_count < 0:
@@ -41,12 +42,9 @@ class MLP(nn.Module):
             ]
         else:
             sizes = [hidden_size for _ in range(hidden_count)]
-        print(sizes)
         hid_layers = []
         for i in range(hidden_count - 1):
             hid_layers.append(nn.Linear(sizes[i], sizes[i + 1]))
-            print(sizes[i])
-            print(sizes[i + 1])
         self.hidden_layers = nn.ModuleList(hid_layers)
         self.last = nn.Linear(sizes[-1], num_classes)
         initializer(self.first.weight)
@@ -66,7 +64,7 @@ class MLP(nn.Module):
         """
         x = self.act(self.first(x))
         for layer in self.hidden_layers:
-            x = self.act(layer(x))
+            x = self.act(self.dropout(layer(x)))
         x = self.last(x)
 
         return x

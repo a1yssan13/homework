@@ -15,7 +15,6 @@ def create_model(input_dim: int, output_dim: int) -> MLP:
         MLP: The created model.
 
     """
-    ##4 is better than 5
     return MLP(
-        input_dim, 1000, output_dim, 5, torch.nn.ReLU, torch.nn.init.xavier_uniform_
+        input_dim, 2500, output_dim, 6, torch.nn.ReLU, torch.nn.init.xavier_uniform_
     )
