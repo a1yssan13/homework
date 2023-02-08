@@ -4,6 +4,11 @@ from typing import Callable
 
 
 class MLP(nn.Module):
+    """
+    A multi-layer perceptron (MLP) model for digit classification on the MNIST dataset.
+
+    """
+
     def __init__(
         self,
         input_size: int,
@@ -26,16 +31,25 @@ class MLP(nn.Module):
         super(MLP, self).__init__()
         self.act = activation()
         self.first = nn.Linear(input_size, hidden_size)
-        self.hidden_layers = nn.ModuleList(
-            [nn.Linear(hidden_size, hidden_size) for _ in range(hidden_count)]
-        )
-        self.last = nn.Linear(hidden_size, num_classes)
+        sizes = [
+            *range(
+                hidden_size, num_classes, -(hidden_size - num_classes) // hidden_count
+            )
+        ]
+        print(sizes)
+        hid_layers = []
+        for i in range(hidden_count - 1):
+            hid_layers.append(nn.Linear(sizes[i], sizes[i + 1]))
+            print(sizes[i])
+            print(sizes[i + 1])
+        self.hidden_layers = nn.ModuleList(hid_layers)
+        self.last = nn.Linear(sizes[-1], num_classes)
         initializer(self.first.weight)
         for layer in self.hidden_layers:
             initializer(layer.weight)
         initializer(self.last.weight)
 
-    def forward(self, x):
+    def forward(self, x: torch.tensor) -> torch.tensor:
         """
         Forward pass of the network.
 
@@ -49,4 +63,5 @@ class MLP(nn.Module):
         for layer in self.hidden_layers:
             x = self.act(layer(x))
         x = self.last(x)
+
         return x
