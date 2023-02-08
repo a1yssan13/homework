@@ -32,21 +32,9 @@ class MLP(nn.Module):
         self.dropout = nn.Dropout(0.3)
         self.act = activation()
         self.first = nn.Linear(input_size, hidden_size)
-        if -(hidden_size - num_classes) // hidden_count < 0:
-            sizes = [
-                *range(
-                    hidden_size,
-                    num_classes,
-                    -(hidden_size - num_classes) // hidden_count,
-                )
-            ]
-        else:
-            sizes = [hidden_size for _ in range(hidden_count)]
-        hid_layers = []
-        for i in range(hidden_count - 1):
-            hid_layers.append(nn.Linear(sizes[i], sizes[i + 1]))
+        hid_layers = [nn.Linear(hidden_size, hidden_size) for _ in range(hidden_count)]
         self.hidden_layers = nn.ModuleList(hid_layers)
-        self.last = nn.Linear(sizes[-1], num_classes)
+        self.last = nn.Linear(hidden_size, num_classes)
         initializer(self.first.weight)
         for layer in self.hidden_layers:
             initializer(layer.weight)
