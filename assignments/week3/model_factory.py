@@ -16,4 +16,6 @@ def create_model(input_dim: int, output_dim: int) -> MLP:
 
     """
     ##4 is better than 5
-    return MLP(input_dim, 256, output_dim, 4, torch.nn.ReLU, torch.nn.init.xavier_uniform_)
+    return MLP(
+        input_dim, 256, output_dim, 4, torch.nn.ReLU, torch.nn.init.xavier_uniform_
+    )

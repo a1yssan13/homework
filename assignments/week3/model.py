@@ -1,5 +1,5 @@
 import torch
-import torch.nn as nn 
+import torch.nn as nn
 from typing import Callable
 
 
@@ -26,11 +26,13 @@ class MLP(nn.Module):
         super(MLP, self).__init__()
         self.act = activation()
         self.first = nn.Linear(input_size, hidden_size)
-        self.hidden_layers = nn.ModuleList([nn.Linear(hidden_size, hidden_size) for _ in range(hidden_count)])
+        self.hidden_layers = nn.ModuleList(
+            [nn.Linear(hidden_size, hidden_size) for _ in range(hidden_count)]
+        )
         self.last = nn.Linear(hidden_size, num_classes)
-        initializer(self.first.weight) 
+        initializer(self.first.weight)
         for layer in self.hidden_layers:
-            initializer(layer.weight) 
+            initializer(layer.weight)
         initializer(self.last.weight)
 
     def forward(self, x):
@@ -45,6 +47,6 @@ class MLP(nn.Module):
         """
         x = self.act(self.first(x))
         for layer in self.hidden_layers:
-            x = self.act(layer(x)) 
-        x = self.last(x) 
-        return x 
+            x = self.act(layer(x))
+        x = self.last(x)
+        return x
