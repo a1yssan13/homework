@@ -10,15 +10,15 @@ class CONFIG:
     # num_epochs = 2
     # initial_learning_rate = 0.005
     # initial_weight_decay = 0
-    batch_size = 32
+    batch_size = 10
     num_epochs = 5
-    initial_learning_rate = 0.001
+    initial_learning_rate = 0.01
     initial_weight_decay = 0
 
     lrs_kwargs = {
         # You can pass arguments to the learning rate scheduler
         # constructor here.
-        "T_max": 50
+        "T_max": num_epochs
     }
 
     optimizer_factory: Callable[
