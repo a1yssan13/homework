@@ -11,7 +11,7 @@ class CONFIG:
     # initial_learning_rate = 0.005
     # initial_weight_decay = 0
     batch_size = 32
-    num_epochs = 10
+    num_epochs = 5
     initial_learning_rate = 0.001
     initial_weight_decay = 0
 
@@ -34,6 +34,6 @@ class CONFIG:
             transforms.RandomRotation(10),
             transforms.RandomHorizontalFlip(),
             transforms.ToTensor(),
-            transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
+            transforms.Normalize((0.4914, 0.4822, 0.4465), (0.247, 0.243, 0.261)),
         ]
     )
