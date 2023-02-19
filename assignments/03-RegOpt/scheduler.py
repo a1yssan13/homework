@@ -21,6 +21,10 @@ class CustomLRScheduler(_LRScheduler):
         Returns:
             List[float]: A list of learning rates, one for each parameter group in the optimizer.
         """
-        return [self.eta_min + (base_lr - self.eta_min) *
-                (1 + math.cos(math.pi * self.last_epoch / self.T_max)) / 2
-                for base_lr in self.base_lrs]
+        return [
+            self.eta_min
+            + (base_lr - self.eta_min)
+            * (1 + math.cos(math.pi * self.last_epoch / self.T_max))
+            / 2
+            for base_lr in self.base_lrs
+        ]
