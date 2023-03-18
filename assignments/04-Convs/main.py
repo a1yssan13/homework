@@ -18,6 +18,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 ACCURACY_THRESHOLD = 0.55
 
+
 def get_cifar10_data() -> Tuple[DataLoader, DataLoader]:
     """
     Get the CIFAR10 data from torchvision.
@@ -159,6 +160,7 @@ def main() -> None:
     print(
         f"Training time: {toc - tic:.2f} seconds, final accuracy: {compute_accuracy(model, test_loader):.2f}"
     )
+
 
 if __name__ == "__main__":
     main()
